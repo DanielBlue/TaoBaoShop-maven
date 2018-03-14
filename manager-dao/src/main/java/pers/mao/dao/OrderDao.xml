@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.mao.dao.OrderDao" >
+  <resultMap id="BaseResultMap" type="pers.mao.pojo.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="oid" property="oid" jdbcType="VARCHAR" />
+    <result column="taobao_code" property="taobaoCode" jdbcType="VARCHAR" />
+    <result column="express_code" property="expressCode" jdbcType="VARCHAR" />
+    <result column="total_price" property="totalPrice" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="alipay_code" property="alipayCode" jdbcType="VARCHAR" />
+    <result column="order_state" property="orderState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, oid, taobao_code, express_code, total_price, date, alipay_code, order_state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.mao.pojo.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="pers.mao.pojo.OrderExample" >
+    delete from product_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pers.mao.pojo.Order" >
+    insert into product_order (id, oid, taobao_code, 
+      express_code, total_price, date, 
+      alipay_code, order_state)
+    values (#{id,jdbcType=INTEGER}, #{oid,jdbcType=VARCHAR}, #{taobaoCode,jdbcType=VARCHAR}, 
+      #{expressCode,jdbcType=VARCHAR}, #{totalPrice,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
+      #{alipayCode,jdbcType=VARCHAR}, #{orderState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pers.mao.pojo.Order" >
+    insert into product_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="taobaoCode != null" >
+        taobao_code,
+      </if>
+      <if test="expressCode != null" >
+        express_code,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="alipayCode != null" >
+        alipay_code,
+      </if>
+      <if test="orderState != null" >
+        order_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="taobaoCode != null" >
+        #{taobaoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCode != null" >
+        #{expressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alipayCode != null" >
+        #{alipayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pers.mao.pojo.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from product_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update product_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.oid != null" >
+        oid = #{record.oid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taobaoCode != null" >
+        taobao_code = #{record.taobaoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressCode != null" >
+        express_code = #{record.expressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalPrice != null" >
+        total_price = #{record.totalPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.alipayCode != null" >
+        alipay_code = #{record.alipayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderState != null" >
+        order_state = #{record.orderState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update product_order
+    set id = #{record.id,jdbcType=INTEGER},
+      oid = #{record.oid,jdbcType=VARCHAR},
+      taobao_code = #{record.taobaoCode,jdbcType=VARCHAR},
+      express_code = #{record.expressCode,jdbcType=VARCHAR},
+      total_price = #{record.totalPrice,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP},
+      alipay_code = #{record.alipayCode,jdbcType=VARCHAR},
+      order_state = #{record.orderState,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pers.mao.pojo.Order" >
+    update product_order
+    <set >
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="taobaoCode != null" >
+        taobao_code = #{taobaoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCode != null" >
+        express_code = #{expressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alipayCode != null" >
+        alipay_code = #{alipayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pers.mao.pojo.Order" >
+    update product_order
+    set oid = #{oid,jdbcType=VARCHAR},
+      taobao_code = #{taobaoCode,jdbcType=VARCHAR},
+      express_code = #{expressCode,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      alipay_code = #{alipayCode,jdbcType=VARCHAR},
+      order_state = #{orderState,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -14,6 +14,12 @@
 
     <!-- 依赖的jar包 -->
     <dependencies>
+        <dependency>
+            <groupId>pers.mao</groupId>
+            <artifactId>manager-pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- 时间操作组件 -->
         <dependency>
             <groupId>joda-time</groupId>
@@ -62,6 +68,16 @@
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>pers.mao</groupId>
+            <artifactId>manager-pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

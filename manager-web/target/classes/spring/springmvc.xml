@@ -10,15 +10,20 @@
     <!--组件扫描-->
     <context:component-scan base-package="pers.mao.controllor"/>
 
+    <!-- 对静态资源放行  -->
+    <mvc:default-servlet-handler />
+
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--配置默认前缀后缀-->
-        <property name="prefix" value=""/>
+        <property name="prefix" value="/WEB-INF/jsp/admin/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
     <!-- 注解驱动 -->
     <mvc:annotation-driven />
+
+    <mvc:view-controller path="/" view-name="index" />
 
 
     <!--<mvc:interceptors>-->
