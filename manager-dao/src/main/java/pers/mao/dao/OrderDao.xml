@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="pers.mao.dao.OrderDao" >
+<mapper namespace="pers.mao.mapper.OrderDao" >
   <resultMap id="BaseResultMap" type="pers.mao.pojo.Order" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="oid" property="oid" jdbcType="VARCHAR" />
@@ -10,6 +10,7 @@
     <result column="date" property="date" jdbcType="TIMESTAMP" />
     <result column="alipay_code" property="alipayCode" jdbcType="VARCHAR" />
     <result column="order_state" property="orderState" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, oid, taobao_code, express_code, total_price, date, alipay_code, order_state
+    id, oid, taobao_code, express_code, total_price, date, alipay_code, order_state, 
+    remark
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.mao.pojo.OrderExample" >
     select
@@ -105,10 +107,12 @@
   <insert id="insert" parameterType="pers.mao.pojo.Order" >
     insert into product_order (id, oid, taobao_code, 
       express_code, total_price, date, 
-      alipay_code, order_state)
+      alipay_code, order_state, remark
+      )
     values (#{id,jdbcType=INTEGER}, #{oid,jdbcType=VARCHAR}, #{taobaoCode,jdbcType=VARCHAR}, 
       #{expressCode,jdbcType=VARCHAR}, #{totalPrice,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
-      #{alipayCode,jdbcType=VARCHAR}, #{orderState,jdbcType=VARCHAR})
+      #{alipayCode,jdbcType=VARCHAR}, #{orderState,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="pers.mao.pojo.Order" >
     insert into product_order
@@ -137,6 +141,9 @@
       <if test="orderState != null" >
         order_state,
       </if>
+      <if test="remark != null" >
+        remark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -162,6 +169,9 @@
       </if>
       <if test="orderState != null" >
         #{orderState,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -198,6 +208,9 @@
       <if test="record.orderState != null" >
         order_state = #{record.orderState,jdbcType=VARCHAR},
       </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +225,8 @@
       total_price = #{record.totalPrice,jdbcType=VARCHAR},
       date = #{record.date,jdbcType=TIMESTAMP},
       alipay_code = #{record.alipayCode,jdbcType=VARCHAR},
-      order_state = #{record.orderState,jdbcType=VARCHAR}
+      order_state = #{record.orderState,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +255,9 @@
       <if test="orderState != null" >
         order_state = #{orderState,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -252,7 +269,49 @@
       total_price = #{totalPrice,jdbcType=VARCHAR},
       date = #{date,jdbcType=TIMESTAMP},
       alipay_code = #{alipayCode,jdbcType=VARCHAR},
-      order_state = #{orderState,jdbcType=VARCHAR}
+      order_state = #{orderState,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!---这里以下自定义-->
+
+  <resultMap id="orderProductResultMap" type="pers.mao.vo.OrderBean">
+    <id property="oid" column="oid"/>
+    <result property="taobao_code" column="taobao_code"/>
+    <result property="express_code" column="express_code"/>
+    <result property="alipay_code" column="alipay_code"/>
+    <result property="total_price" column="total_price"/>
+    <result property="date" column="date"/>
+    <result property="orderState" column="order_state"/>
+    <result property="remark" column="remark"/>
+
+    <collection property="productList" javaType="list" ofType="Product">
+      <id property="oid" column="oid"/>
+      <result property="name" column="name"/>
+      <result property="price" column="price"/>
+      <result property="freight" column="freight"/>
+    </collection>
+  </resultMap>
+
+  <select id="selectOrderBeanByOid" resultMap="orderProductResultMap" parameterType="pers.mao.vo.SelectLimitVo">
+    SELECT
+    o.oid,
+    o.taobao_code,
+    o.express_code,
+    o.alipay_code,
+    o.total_price,
+    o.date,
+    o.order_state,
+    o.remark,
+    p.oid,
+    p.name,
+    p.price,
+    p.freight
+    FROM product_order o LEFT JOIN product p ON o.oid = p.oid
+    WHERE o.oid like '%${oid}%'
+    ORDER BY o.oid DESC
+    LIMIT #{startIndex},#{count}
+  </select>
+
 </mapper>

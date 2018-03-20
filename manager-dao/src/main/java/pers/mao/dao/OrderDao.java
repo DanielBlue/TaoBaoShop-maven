@@ -1,9 +1,12 @@
 package pers.mao.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import pers.mao.pojo.Order;
 import pers.mao.pojo.OrderExample;
+import pers.mao.vo.OrderBean;
+import pers.mao.vo.SelectLimitVo;
+
+import java.util.List;
 
 public interface OrderDao {
     int countByExample(OrderExample example);
@@ -27,4 +30,6 @@ public interface OrderDao {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    List<OrderBean> selectOrderBeanByOid(SelectLimitVo limitVo);
 }

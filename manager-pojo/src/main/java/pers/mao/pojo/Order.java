@@ -19,6 +19,8 @@ public class Order {
 
     private String orderState;
 
+    private String remark;
+
     public Integer getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class Order {
 
     public void setOrderState(String orderState) {
         this.orderState = orderState == null ? null : orderState.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 }
