@@ -309,7 +309,17 @@
     p.price,
     p.freight
     FROM product_order o LEFT JOIN product p ON o.oid = p.oid
-    WHERE o.oid like '%${oid}%'
+    <where>
+        <if test="oid!=null">
+          AND o.oid like '%${oid}%'
+        </if>
+        <if test="order_state!=null">
+          AND order_state = #{order_state}
+        </if>
+        <if test="express_code!=null">
+          AND express_code = #{express_code}
+        </if>
+    </where>
     ORDER BY o.oid DESC
     LIMIT #{startIndex},#{count}
   </select>
