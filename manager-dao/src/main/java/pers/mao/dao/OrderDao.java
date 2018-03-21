@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import pers.mao.pojo.Order;
 import pers.mao.pojo.OrderExample;
 import pers.mao.vo.OrderBean;
-import pers.mao.vo.SelectLimitVo;
+import pers.mao.vo.OrderSelectVo;
 
 import java.util.List;
 
@@ -31,5 +31,5 @@ public interface OrderDao {
 
     int updateByPrimaryKey(Order record);
 
-    List<OrderBean> selectOrderBeanByOid(SelectLimitVo limitVo);
+    List<OrderBean> selectOrderBeanByOid(OrderSelectVo limitVo);
 }

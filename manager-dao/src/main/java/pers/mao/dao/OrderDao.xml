@@ -294,7 +294,7 @@
     </collection>
   </resultMap>
 
-  <select id="selectOrderBeanByOid" resultMap="orderProductResultMap" parameterType="pers.mao.vo.SelectLimitVo">
+  <select id="selectOrderBeanByOid" resultMap="orderProductResultMap" parameterType="pers.mao.vo.OrderSelectVo">
     SELECT
     o.oid,
     o.taobao_code,

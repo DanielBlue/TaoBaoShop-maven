@@ -1,11 +1,21 @@
 package pers.mao.vo;
 
-public class SelectLimitVo {
+public class OrderSelectVo {
     private String oid;
     private String order_state;
     private String express_code;
     private Integer startIndex;
     private Integer count;
+    private Integer currentPage;
+
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
 
     public String getOrder_state() {
         return order_state;
