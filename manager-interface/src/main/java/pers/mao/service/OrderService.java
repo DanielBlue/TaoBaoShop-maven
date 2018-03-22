@@ -10,8 +10,18 @@ public interface OrderService {
 
     int getCountByOrderSelectVo(OrderSelectVo vo);
 
-    boolean getOrderIsExisted(String oid);
+    boolean getOrderIsExistedByOid(String oid);
+
+    boolean getOrderIsExistedByAlipayCode(String alipayCode);
 
     void addOrder(Order order);
+
+    void updateOrderByOid(Order order);
+
+    void updateOrderByAcode(Order order);
+
+    Order getOrderByOid(String oid);
+
+    void deleteOrderByOid(String oid);
 
 }

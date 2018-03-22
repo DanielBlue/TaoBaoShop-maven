@@ -22,6 +22,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public PageBean<OrderBean> getPageBeanByOrderSelectVo(OrderSelectVo vo) {
+        if (vo.getCurrentPage()==null||vo.getCurrentPage()==0){
+            vo.setCurrentPage(1);
+        }
         PageBean<OrderBean> pageBean = new PageBean<>();
         pageBean.setCurrentPage(vo.getCurrentPage());
         pageBean.setCurrentCount(vo.getCount());
@@ -54,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean getOrderIsExisted(String oid) {
+    public boolean getOrderIsExistedByOid(String oid) {
         OrderExample example = new OrderExample();
         example.createCriteria().andOidLike("%"+oid+"%");
         int count = orderDao.countByExample(example);
@@ -62,8 +65,45 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public boolean getOrderIsExistedByAlipayCode(String alipayCode) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andAlipayCodeEqualTo(alipayCode);
+        int count = orderDao.countByExample(example);
+        return count>0;
+    }
+
+    @Override
     public void addOrder(Order order) {
         orderDao.insert(order);
+    }
+
+    @Override
+    public void updateOrderByOid(Order order) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andOidEqualTo(order.getOid());
+        orderDao.updateByExample(order,example);
+    }
+
+    @Override
+    public void updateOrderByAcode(Order order) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andAlipayCodeEqualTo(order.getAlipayCode());
+        orderDao.updateByExample(order,example);
+    }
+
+    @Override
+    public Order getOrderByOid(String oid) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andOidEqualTo(oid);
+        List<Order> orders = orderDao.selectByExample(example);
+        return orders.get(0);
+    }
+
+    @Override
+    public void deleteOrderByOid(String oid) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andOidEqualTo(oid);
+        orderDao.deleteByExample(example);
     }
 
 
