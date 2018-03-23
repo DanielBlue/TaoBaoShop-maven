@@ -4,14 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import pers.mao.dao.OrderDao;
+import pers.mao.dao.ProductDao;
 import pers.mao.pojo.Order;
 import pers.mao.pojo.OrderExample;
+import pers.mao.pojo.Product;
 import pers.mao.service.OrderService;
 import pers.mao.utils.ConstantUtils;
 import pers.mao.vo.OrderBean;
 import pers.mao.vo.OrderSelectVo;
 import pers.mao.vo.PageBean;
+import pers.mao.vo.TaobaoBean;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -19,6 +23,9 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderDao orderDao;
+
+    @Autowired
+    ProductDao productDao;
 
     @Override
     public PageBean<OrderBean> getPageBeanByOrderSelectVo(OrderSelectVo vo) {
@@ -104,6 +111,35 @@ public class OrderServiceImpl implements OrderService {
         OrderExample example = new OrderExample();
         example.createCriteria().andOidEqualTo(oid);
         orderDao.deleteByExample(example);
+    }
+
+    @Override
+    public void insertProductAndOrder(TaobaoBean taobaoBean) {
+        Order order = new Order();
+        order.setDate(new Date());
+
+        for (int i = 0; i < taobaoBean.getOrder_array().size(); i++) {
+            String tempOid;
+            if (i < 9) {
+                tempOid = taobaoBean.getOrder_id() + "0" + (i + 1);
+            } else {
+                tempOid = taobaoBean.getOrder_id() + (i + 1);
+            }
+            order.setTotalPrice(taobaoBean.getOrder_array().get(i).getTotal_price());
+            order.setOid(tempOid);
+            order.setAlipayCode(taobaoBean.getOrder_array().get(i).getAlipay_code());
+            addOrder(order);
+            TaobaoBean.OrderArrayBean orderArrayBean = taobaoBean.getOrder_array().get(i);
+            for (TaobaoBean.OrderArrayBean.ProductArrayBean productArrayBean : orderArrayBean.getProduct_array()) {
+                Product product = new Product();
+                product.setOid(tempOid);
+                product.setName(productArrayBean.getProduct_desc());
+                System.out.println(productArrayBean.getProduct_desc());
+                product.setFreight(orderArrayBean.getFreight());
+                product.setPrice(productArrayBean.getProduct_price());
+                saveProduct(product);
+            }
+        }
     }
 
 

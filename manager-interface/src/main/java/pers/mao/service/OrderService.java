@@ -4,6 +4,7 @@ import pers.mao.pojo.Order;
 import pers.mao.vo.OrderBean;
 import pers.mao.vo.OrderSelectVo;
 import pers.mao.vo.PageBean;
+import pers.mao.vo.TaobaoBean;
 
 public interface OrderService {
     PageBean<OrderBean> getPageBeanByOrderSelectVo(OrderSelectVo vo);
@@ -24,4 +25,5 @@ public interface OrderService {
 
     void deleteOrderByOid(String oid);
 
+    void insertProductAndOrder(TaobaoBean taobaoBean);
 }

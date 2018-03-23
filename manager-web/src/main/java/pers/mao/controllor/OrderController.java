@@ -1,21 +1,17 @@
 package pers.mao.controllor;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.mao.pojo.Order;
 import pers.mao.service.OrderService;
 import pers.mao.utils.ConstantUtils;
-import pers.mao.vo.OrderBean;
-import pers.mao.vo.OrderSelectVo;
-import pers.mao.vo.PageBean;
-import pers.mao.vo.ResponseWrapper;
+import pers.mao.vo.*;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 @Controller
@@ -99,11 +95,15 @@ public class OrderController {
             }
         }
 
-        try {
-            response = new ObjectMapper().writeValueAsString(wrapper);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        Gson gson = new Gson();
+        response = gson.toJson(wrapper);
         return response;
+    }
+
+    @RequestMapping("/save_product")
+    @ResponseBody
+    public String saveProductAndOrder(@RequestBody TaobaoBean taobaoBean){
+        orderService.insertProductAndOrder(taobaoBean);
+        return "";
     }
 }
