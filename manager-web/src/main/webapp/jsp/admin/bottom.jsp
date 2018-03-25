@@ -14,7 +14,7 @@
 			<tr>
 				<td align="center" width="100%" style= valign="top" background="${pageContext.request.contextPath}/images/bt_02.jpg">淘宝订单管理平台&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 				<font class="font12">
-				<a class="a03" target="_blank" href="mailto:sarft@chinasarft.gov.cn">
+				<a class="a03" target="_blank" href="mailto:352095418@qq.com">
 				<font color="#000000"><br>
 ��</font></a></font></td>
 			</tr>
