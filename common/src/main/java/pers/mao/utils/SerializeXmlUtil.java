@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
+import pers.mao.vo.XStreamCDATA;
 
 import java.io.Writer;
 import java.lang.reflect.Field;

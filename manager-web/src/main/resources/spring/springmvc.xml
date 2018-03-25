@@ -16,7 +16,7 @@
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--配置默认前缀后缀-->
-        <property name="prefix" value="/WEB-INF/jsp/admin/"/>
+        <property name="prefix" value="/jsp/admin/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
@@ -26,10 +26,10 @@
     <mvc:view-controller path="/" view-name="index" />
 
 
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="pers.mao.interceptor.LoginInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<bean class="pers.mao.interceptor.LoginInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 </beans>

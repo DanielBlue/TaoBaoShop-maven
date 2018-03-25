@@ -32,6 +32,9 @@ public class OrderServiceImpl implements OrderService {
         if (vo.getCurrentPage()==null||vo.getCurrentPage()==0){
             vo.setCurrentPage(1);
         }
+        if (vo.getCount()==null||vo.getCount()==0){
+            vo.setCount(5);
+        }
         PageBean<OrderBean> pageBean = new PageBean<>();
         pageBean.setCurrentPage(vo.getCurrentPage());
         pageBean.setCurrentCount(vo.getCount());
@@ -107,6 +110,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> getOrdersByOid(String oid) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andOidLike("%"+oid+"%");
+        List<Order> orders = orderDao.selectByExample(example);
+        return orders;
+    }
+
+    @Override
     public void deleteOrderByOid(String oid) {
         OrderExample example = new OrderExample();
         example.createCriteria().andOidEqualTo(oid);
@@ -137,7 +148,7 @@ public class OrderServiceImpl implements OrderService {
                 System.out.println(productArrayBean.getProduct_desc());
                 product.setFreight(orderArrayBean.getFreight());
                 product.setPrice(productArrayBean.getProduct_price());
-                saveProduct(product);
+                productDao.insert(product);
             }
         }
     }

@@ -6,6 +6,8 @@ import pers.mao.vo.OrderSelectVo;
 import pers.mao.vo.PageBean;
 import pers.mao.vo.TaobaoBean;
 
+import java.util.List;
+
 public interface OrderService {
     PageBean<OrderBean> getPageBeanByOrderSelectVo(OrderSelectVo vo);
 
@@ -22,6 +24,8 @@ public interface OrderService {
     void updateOrderByAcode(Order order);
 
     Order getOrderByOid(String oid);
+
+    List<Order> getOrdersByOid(String oid);
 
     void deleteOrderByOid(String oid);
 
