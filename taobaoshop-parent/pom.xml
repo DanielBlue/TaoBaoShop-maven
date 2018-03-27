@@ -10,6 +10,7 @@
     <modules>
         <module>../common</module>
         <module>../manager</module>
+        <module>../manager-pojo</module>
     </modules>
     <packaging>pom</packaging>
 

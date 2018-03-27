@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>../manager-dao</module>
-        <module>../manager-pojo</module>
         <module>../manager-service</module>
         <module>../manager-interface</module>
         <module>../manager-web</module>

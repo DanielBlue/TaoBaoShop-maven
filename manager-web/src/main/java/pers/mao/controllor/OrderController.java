@@ -5,7 +5,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -97,7 +96,6 @@ public class OrderController {
                     wrapper.setCode(ConstantUtils.FAIL_CODE);
                     wrapper.setInfo(ConstantUtils.ALIPAY_CODE_NOT_EXIST);
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
                 wrapper.setCode(ConstantUtils.FAIL_CODE);
