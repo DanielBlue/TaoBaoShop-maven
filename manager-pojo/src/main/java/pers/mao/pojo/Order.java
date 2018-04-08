@@ -21,6 +21,9 @@ public class Order {
 
     private String remark;
 
+    public Order() {
+    }
+
     public Integer getId() {
         return id;
     }

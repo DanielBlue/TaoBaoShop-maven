@@ -19,4 +19,6 @@ public interface AdminDao {
     int updateByExampleSelective(@Param("record") Admin record, @Param("example") AdminExample example);
 
     int updateByExample(@Param("record") Admin record, @Param("example") AdminExample example);
+
+
 }

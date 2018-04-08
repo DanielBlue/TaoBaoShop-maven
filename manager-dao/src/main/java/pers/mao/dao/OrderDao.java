@@ -32,4 +32,6 @@ public interface OrderDao {
     int updateByPrimaryKey(Order record);
 
     List<OrderBean> selectOrderBeanByOid(OrderSelectVo limitVo);
+
+    void updateCodeByExample(Order order, OrderExample example);
 }

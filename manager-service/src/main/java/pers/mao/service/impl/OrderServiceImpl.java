@@ -98,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrderByAcode(Order order) {
         OrderExample example = new OrderExample();
         example.createCriteria().andAlipayCodeEqualTo(order.getAlipayCode());
-        orderDao.updateByExample(order,example);
+        orderDao.updateCodeByExample(order,example);
     }
 
     @Override
@@ -151,6 +151,13 @@ public class OrderServiceImpl implements OrderService {
                 productDao.insert(product);
             }
         }
+    }
+
+    @Override
+    public void updateOrderCodeByOid(Order order) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andOidEqualTo(order.getOid());
+        orderDao.updateCodeByExample(order,example);
     }
 
 

@@ -30,4 +30,6 @@ public interface OrderService {
     void deleteOrderByOid(String oid);
 
     void insertProductAndOrder(TaobaoBean taobaoBean);
+
+    void updateOrderCodeByOid(Order order);
 }

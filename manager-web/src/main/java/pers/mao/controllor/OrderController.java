@@ -98,7 +98,7 @@ public class OrderController {
 
     @RequestMapping("/code_update_order")
     @ResponseBody
-    public String codeUpdateOrder(Order order) {
+    public String codeUpdateOrder(@RequestBody Order order) {
         ResponseWrapper wrapper = new ResponseWrapper();
         String response = "";
         if (order.getAlipayCode() == null || order.getAlipayCode().isEmpty()) {
@@ -108,7 +108,7 @@ public class OrderController {
             try {
                 boolean isExisted = orderService.getOrderIsExistedByAlipayCode(order.getAlipayCode());
                 if (isExisted) {
-                    orderService.updateOrderByOid(order);
+                    orderService.updateOrderByAcode(order);
                     wrapper.setCode(ConstantUtils.SUCCESS_CODE);
                     wrapper.setInfo(ConstantUtils.UPDATE_SUCCESS);
                 } else {

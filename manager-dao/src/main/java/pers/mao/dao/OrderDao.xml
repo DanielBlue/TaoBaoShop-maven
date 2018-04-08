@@ -222,10 +222,24 @@
       taobao_code = #{record.taobaoCode,jdbcType=VARCHAR},
       express_code = #{record.expressCode,jdbcType=VARCHAR},
       alipay_code = #{record.alipayCode,jdbcType=VARCHAR},
+      order_state = #{record.orderState,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <update id="updateCodeByExample" parameterType="map" >
+    update product_order
+    set
+    taobao_code = #{record.taobaoCode,jdbcType=VARCHAR},
+    express_code = #{record.expressCode,jdbcType=VARCHAR},
+    alipay_code = #{record.alipayCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
   <update id="updateByPrimaryKeySelective" parameterType="pers.mao.pojo.Order" >
     update product_order
     <set >
