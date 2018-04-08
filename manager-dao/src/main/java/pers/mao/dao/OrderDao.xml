@@ -218,15 +218,10 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update product_order
-    set id = #{record.id,jdbcType=INTEGER},
-      oid = #{record.oid,jdbcType=VARCHAR},
+    set
       taobao_code = #{record.taobaoCode,jdbcType=VARCHAR},
       express_code = #{record.expressCode,jdbcType=VARCHAR},
-      total_price = #{record.totalPrice,jdbcType=VARCHAR},
-      date = #{record.date,jdbcType=TIMESTAMP},
       alipay_code = #{record.alipayCode,jdbcType=VARCHAR},
-      order_state = #{record.orderState,jdbcType=VARCHAR},
-      remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
