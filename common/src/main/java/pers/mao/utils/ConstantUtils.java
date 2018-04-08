@@ -3,6 +3,7 @@ package pers.mao.utils;
 public class ConstantUtils {
 
     public static final String NO_FITTER = "2";
+    public static final String NOT_COMPLETE = "0";
     public static final String FAIL_CODE = "10010";
     public static final String SUCCESS_CODE = "10000";
     public static final String ALIPAY_CODE_EMPTY = "支付宝交易号为空";

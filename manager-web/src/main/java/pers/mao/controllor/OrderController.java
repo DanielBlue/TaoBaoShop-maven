@@ -34,13 +34,32 @@ public class OrderController {
     public String orderList(OrderSelectVo vo, Model model) {
         PageBean<OrderBean> pageBean = orderService.getPageBeanByOrderSelectVo(vo);
         model.addAttribute(pageBean);
-        model.addAttribute(vo.getOid());
+        if (vo != null) {
+            if (vo.getOid() != null) {
+                model.addAttribute("oid", vo.getOid());
+            }
+
+            if (vo.getOid() != null) {
+                model.addAttribute("express_code", vo.getExpress_code());
+            }
+
+            if (vo.getOrder_state() != null) {
+                model.addAttribute("order_state", vo.getOrder_state());
+            } else {
+                model.addAttribute("order_state", ConstantUtils.NO_FITTER);
+            }
+        }
+
+
         return "/product/list";
     }
 
     @RequestMapping("/add_order")
     public String addOrder(Order order, Model model) {
         String oid = order.getOid();
+        if (order.getOrderState() == null) {
+            order.setOrderState(ConstantUtils.NOT_COMPLETE);
+        }
         if (oid != null && !oid.trim().isEmpty() && oid.length() == 12) {
             order.setDate(new Date());
             Boolean isExisted = orderService.getOrderIsExistedByOid(oid);

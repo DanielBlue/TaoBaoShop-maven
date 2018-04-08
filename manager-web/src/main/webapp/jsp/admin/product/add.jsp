@@ -40,7 +40,7 @@
 						淘宝单号：
 					</td>
 					<td width="30%" height="50px" class="ta_01" bgColor="#ffffff">
-						<input type="text" name="taobao_code" value="${order.taobao_code}" id="userAction_save_do_taobao_code" class="bg"/>
+						<input type="text" name="taobaoCode" value="${order.taobaoCode}" id="userAction_save_do_taobaoCode" class="bg"/>
 					</td>
 				</tr>
 				<tr>
@@ -48,8 +48,8 @@
 						快递单号：
 					</td>
 					<td class="ta_01" height="50px" bgColor="#ffffff" colspan="3">
-						<input type="text" name="express_code" value="${order.express_code}"
-							   id="userAction_save_do_express_code" class="bg"/>
+						<input type="text" name="expressCode" value="${order.expressCode}"
+							   id="userAction_save_do_expressCode" class="bg"/>
 					</td>
 				</tr>
 				<tr>
@@ -57,8 +57,8 @@
 						交易号：
 					</td>
 					<td class="ta_01" height="50px" bgColor="#ffffff" colspan="3">
-						<input type="text" name="alipay_code" value="${order.alipay_code}"
-							   id="userAction_save_do_alipay_code" class="bg"/>
+						<input type="text" name="alipayCode" value="${order.alipayCode}"
+							   id="userAction_save_do_alipayCode" class="bg"/>
 					</td>
 				</tr>
 				<tr style="FONT-WEIGHT: bold; FONT-SIZE: 20pt; HEIGHT: 25px">
@@ -66,8 +66,8 @@
 						订单总价：
 					</td>
 					<td class="ta_01" height="50px" bgColor="#ffffff" colspan="3">
-						<input type="text" name="total_price" value="${order.total_price}"
-							   id="userAction_save_do_total_price" class="bg"/>
+						<input type="text" name="totalPrice" value="${order.totalPrice}"
+							   id="userAction_save_do_totalPrice" class="bg"/>
 					</td>
 
 

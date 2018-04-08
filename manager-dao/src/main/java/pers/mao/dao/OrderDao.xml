@@ -287,7 +287,6 @@
     <result property="remark" column="remark"/>
 
     <collection property="productList" javaType="list" ofType="Product">
-      <id property="oid" column="oid"/>
       <result property="name" column="name"/>
       <result property="price" column="price"/>
       <result property="freight" column="freight"/>
@@ -310,14 +309,14 @@
     p.freight
     FROM product_order o LEFT JOIN product p ON o.oid = p.oid
     <where>
-        <if test="oid!=null">
+        <if test="oid!=null and oid !=''">
           AND o.oid like '%${oid}%'
         </if>
-        <if test="order_state!=null">
-          AND order_state = #{order_state}
+        <if test="order_state!=null and order_state!=2">
+            AND order_state = #{order_state}
         </if>
-        <if test="express_code!=null">
-          AND express_code = #{express_code}
+        <if test="express_code!=null and express_code!=''">
+          AND express_code like '%${express_code}%'
         </if>
     </where>
     ORDER BY o.oid DESC

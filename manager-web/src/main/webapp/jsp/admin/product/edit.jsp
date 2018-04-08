@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <HTML>
 	<HEAD>
 		<meta http-equiv="Content-Language" content="zh-cn">
@@ -35,7 +36,7 @@
 						淘宝单号：
 					</td>
 					<td width="30%" height="50px" class="ta_01" bgColor="#ffffff">
-						<input type="text" name="taobao_code" value="${order.taobao_code}" id="userAction_save_do_taobao_code" class="bg"/>
+						<input type="text" name="taobaoCode" value="${order.taobaoCode}" id="userAction_save_do_taobaoCode" class="bg"/>
 					</td>
 				</tr>
 				<tr>
@@ -43,8 +44,8 @@
 						快递单号：
 					</td>
 					<td class="ta_01" height="50px" bgColor="#ffffff" colspan="3">
-						<input type="text" name="express_code" value="${order.express_code}"
-							   id="userAction_save_do_express_code" class="bg" />
+						<input type="text" name="expressCode" value="${order.expressCode}"
+							   id="userAction_save_do_expressCode" class="bg" />
 					</td>
 				</tr>
 				<tr>
@@ -52,8 +53,8 @@
 						交易号：
 					</td>
 					<td class="ta_01" height="50px" bgColor="#ffffff" colspan="3">
-						<input type="text" name="alipay_code" value="${order.alipay_code}"
-							   id="userAction_save_do_alipay_code" class="bg"/>
+						<input type="text" name="alipayCode" value="${order.alipayCode}"
+							   id="userAction_save_do_alipayCode" class="bg"/>
 					</td>
 				</tr>
 				<tr style="FONT-WEIGHT: bold; FONT-SIZE: 20pt; HEIGHT: 25px">
@@ -61,7 +62,7 @@
 						订单总价：
 					</td>
 					<td class="ta_01" height="50px" bgColor="#ffffff" colspan="3">
-						${order.total_price}
+						${order.totalPrice}
 					</td>
 				</tr>
 				<tr>
@@ -69,7 +70,7 @@
 						日期：
 					</td>
 					<td class="ta_01" height="50px" bgColor="#ffffff" colspan="3">
-						${order.date}
+						<fmt:formatDate value="${order.date}" type="both"/>
 					</td>
 				</tr>
 
@@ -78,8 +79,8 @@
 						订单状态：
 					</td>
 					<td class="ta_01" height="50px" bgColor="#ffffff" colspan="3">
-						<c:if test="${order.order_state==0}">
-							<select style="height: 30px" name="order_state">
+						<c:if test="${order.orderState==0}">
+							<select style="height: 30px" name="orderState">
 								<option value="0">未完成</option>
 								<option value="1">已完成</option>
 								<option value="3">凭证遗失</option>
@@ -87,24 +88,24 @@
 							</select>
 						</c:if>
 
-						<c:if test="${order.order_state==1}">
-							<select style="height: 30px" name="order_state">
+						<c:if test="${order.orderState==1}">
+							<select style="height: 30px" name="orderState">
 								<option value="1">已完成</option>
 								<option value="0">未完成</option>
 								<option value="3">凭证遗失</option>
 								<option value="4">遗失已完成</option>
 							</select>
 						</c:if>
-						<c:if test="${order.order_state==3}">
-							<select style="height: 30px" name="order_state">
+						<c:if test="${order.orderState==3}">
+							<select style="height: 30px" name="orderState">
 								<option value="3">凭证遗失</option>
 								<option value="0">未完成</option>
 								<option value="1">已完成</option>
 								<option value="4">遗失已完成</option>
 							</select>
 						</c:if>
-						<c:if test="${order.order_state==4}">
-							<select style="height: 30px" name="order_state">
+						<c:if test="${order.orderState==4}">
+							<select style="height: 30px" name="orderState">
 								<option value="4">遗失已完成</option>
 								<option value="0">未完成</option>
 								<option value="1">已完成</option>

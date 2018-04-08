@@ -32,7 +32,7 @@
         })
 
         function addProduct() {
-            window.location.href = "add.jsp";
+            window.location.href = "${pageContext.request.contextPath}/jsp/admin/product/add.jsp";
         }
 
     </script>
@@ -90,11 +90,11 @@
 </select>
     &nbsp;&nbsp;&nbsp;&nbsp;每页展示数：
     <select style="height: 30px" name="count">
-        <c:if test="${count==5}">
+        <c:if test="${pageBean.currentCount==5}">
             <option value="5" selected="selected">5</option>
             <option value="10">10</option>
         </c:if>
-        <c:if test="${count==10}">
+        <c:if test="${pageBean.currentCount==10}">
             <option value="5">5</option>
             <option value="10" selected="selected">10</option>
         </c:if>
@@ -139,7 +139,7 @@
                     </tr>
 
                     <c:forEach var="orderBean" items="${pageBean.itemList}" varStatus="index">
-                        <tr id="${orderBean.order.oid}"
+                        <tr id="${orderBean.oid}"
                             class="parent"
                             style="HEIGHT: 50px;"
                             onmouseover="this.style.backgroundColor = 'white'"
@@ -147,59 +147,59 @@
                             <td style="CURSOR: hand; HEIGHT: 25px" align="center"
                                 width="3%">${pageBean.currentCount*(pageBean.currentPage-1)+index.count}</td>
                             <td style="CURSOR: hand; HEIGHT: 25px" align="center"
-                                width="8%">${orderBean.order.oid}</td>
+                                width="8%">${orderBean.oid}</td>
                             <td style="CURSOR: hand; HEIGHT: 25px" align="center"
                                 width="13%">
-                                <a style="text-decoration:underline;" target="_blank" href="https://trade.taobao.com/trade/detail/trade_order_detail.htm?biz_order_id=${orderBean.order.taobao_code}">${orderBean.order.taobao_code}</a></td>
+                                <a style="text-decoration:underline;" target="_blank" href="https://trade.taobao.com/trade/detail/trade_order_detail.htm?biz_order_id=${orderBean.taobao_code}">${orderBean.taobao_code}</a></td>
                             <td style="CURSOR: hand; HEIGHT: 25px" align="center"
                                 width="13%">
                                 <a style="text-decoration:underline;" target="_blank"
-                                   href="${pageContext.request.contextPath}/query_express?express_code=${orderBean.order.express_code}">${orderBean.order.express_code}</a>
+                                   href="${pageContext.request.contextPath}/query_express?express_code=${orderBean.express_code}">${orderBean.express_code}</a>
                             </td>
                             <td style="CURSOR: hand; HEIGHT: 25px" align="center"
-                                width="15%">${orderBean.order.alipay_code}</td>
-                            <td align="center" width="6%">${orderBean.order.total_price}</td>
+                                width="15%">${orderBean.alipay_code}</td>
+                            <td align="center" width="6%">${orderBean.total_price}</td>
                             <td style="CURSOR: hand; HEIGHT: 25px" align="center"
-                                width="13%">${orderBean.order.date}</td>
-                            <c:if test="${orderBean.order.order_state==1}">
+                                width="13%">${orderBean.date}</td>
+                            <c:if test="${orderBean.orderState==1}">
                                 <td style="color:green;CURSOR: hand; HEIGHT: 25px" align="center"
                                     width="6%">已完成
                                 </td>
                             </c:if>
-                            <c:if test="${orderBean.order.order_state==0}">
+                            <c:if test="${orderBean.orderState==0}">
                                 <td style="CURSOR: hand; HEIGHT: 25px" align="center"
                                     width="6%">未完成
                                 </td>
                             </c:if>
-                            <c:if test="${orderBean.order.order_state==3}">
+                            <c:if test="${orderBean.orderState==3}">
                                 <td style="color:red;CURSOR: hand; HEIGHT: 25px" align="center"
                                     width="6%">凭证遗失
                                 </td>
                             </c:if>
-                            <c:if test="${orderBean.order.order_state==4}">
+                            <c:if test="${orderBean.orderState==4}">
                                 <td style="color:blue;CURSOR: hand; HEIGHT: 25px" align="center"
                                     width="6%">遗失已完成
                                 </td>
                             </c:if>
 
                             <td style="CURSOR: hand; HEIGHT: 25px" align="center"
-                                width="8%">${orderBean.order.remark}</td>
+                                width="8%">${orderBean.remark}</td>
                             <td align="center" style="HEIGHT: 25px" class="td_edit">
-                                <a href="${ pageContext.request.contextPath }/order/edit_order?oid=${orderBean.order.oid}">
+                                <a href="${ pageContext.request.contextPath }/order/edit_order?oid=${orderBean.oid}">
                                     <img src="${pageContext.request.contextPath}/images/i_edit.gif"
                                          border="0" style="CURSOR: hand">
                                 </a></td>
 
                             <td align="center" style="HEIGHT: 25px" class="td_delete">
                                 <a href="#"
-                                   onclick="confirm('确定删除吗？')?location.href='${ pageContext.request.contextPath }/order/delete_order?oid=${orderBean.order.oid}':''">
+                                   onclick="confirm('确定删除吗？')?location.href='${ pageContext.request.contextPath }/order/delete_order?oid=${orderBean.oid}':''">
                                     <img src="${pageContext.request.contextPath}/images/i_del.gif"
                                          width="16" height="16" border="0" style="CURSOR: hand">
                                 </a></td>
                         </tr>
 
                         <c:forEach var="product" items="${orderBean.productList}" varStatus="index">
-                            <tr class="child_${orderBean.order.oid}"
+                            <tr class="child_${orderBean.oid}"
                                 style="BACKGROUND-COLOR: #FFF38F;HEIGHT: 40px">
                                 <td align="center">${index.count}</td>
                                 <td align="center" colspan="4">${product.name}</td>
