@@ -98,7 +98,7 @@ public class OrderController {
 
     @RequestMapping("/code_update_order")
     @ResponseBody
-    public String codeUpdateOrder(@RequestBody Order order) {
+    public String codeUpdateOrder(Order order) {
         ResponseWrapper wrapper = new ResponseWrapper();
         String response = "";
         if (order.getAlipayCode() == null || order.getAlipayCode().isEmpty()) {

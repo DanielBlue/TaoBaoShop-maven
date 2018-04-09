@@ -33,5 +33,5 @@ public interface OrderDao {
 
     List<OrderBean> selectOrderBeanByOid(OrderSelectVo limitVo);
 
-    void updateCodeByExample(Order order, OrderExample example);
+    void updateCodeByExample(@Param("record")Order order,@Param("example") OrderExample example);
 }
